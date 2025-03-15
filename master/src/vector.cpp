@@ -1,78 +1,71 @@
-
+#include "vector.h"
 #include <cmath>
-#include <string>
 #include <sstream>
 #include <iomanip>
 
+// Constructors
+Vector::Vector(float x, float y) : x(x), y(y) {}
+Vector::Vector() : x(0.0f), y(0.0f) {}
 
-class Vector {
-public:
-    float x, y;
+// Instance methods
+std::string Vector::toString() const {
+    std::ostringstream ss;
+    ss << "<" << std::fixed << std::setprecision(6) << x << ", "
+       << std::fixed << std::setprecision(6) << y << ">";
+    return ss.str();
+}
 
-    // Constructors
-    Vector(float x, float y) : x(x), y(y) {}
-    Vector() : x(0.0f), y(0.0f) {}
+Vector Vector::copy() const {
+    return Vector(x, y);
+}
 
-    // Instance methods
-    std::string toString() const {
-        std::ostringstream ss;
-        ss << "<" << std::fixed << std::setprecision(6) << x << ", " 
-           << std::fixed << std::setprecision(6) << y << ">";
-        return ss.str();
-    }
-    
-    Vector copy() const {
-        return Vector(x, y);
-    }
-    
-    bool equals(const Vector& other) const {
-        return x == other.x && y == other.y;
-    }
-    
-    void add(const Vector& b) {
-        x += b.x;
-        y += b.y;
-    }
-    
-    void sub(const Vector& b) {
-        x -= b.x;
-        y -= b.y;
-    }
-    
-    void mult(float scalar) {
-        x *= scalar;
-        y *= scalar;
-    }
-    
-    float magSquared() const {
-        return x * x + y * y;
-    }
-    
-    float mag() const {
-        return std::sqrt(magSquared());
-    }
-    
-    void normalize() {
-        float m = mag();
-        if (m > 0) {
-            mult(1.0f / m);
-        }
-    }
+bool Vector::equals(const Vector& other) const {
+    return x == other.x && y == other.y;
+}
 
-    // Static methods
-    static Vector add(const Vector& a, const Vector& b) {
-        return Vector(a.x + b.x, a.y + b.y);
+void Vector::add(const Vector& b) {
+    x += b.x;
+    y += b.y;
+}
+
+void Vector::sub(const Vector& b) {
+    x -= b.x;
+    y -= b.y;
+}
+
+void Vector::mult(float scalar) {
+    x *= scalar;
+    y *= scalar;
+}
+
+float Vector::magSquared() const {
+    return x * x + y * y;
+}
+
+float Vector::mag() const {
+    return std::sqrt(magSquared());
+}
+
+void Vector::normalize() {
+    float m = mag();
+    if (m > 0) {
+        mult(1.0f / m);
     }
-    
-    static Vector sub(const Vector& a, const Vector& b) {
-        return Vector(a.x - b.x, a.y - b.y);
-    }
-    
-    static Vector mult(const Vector& a, float scalar) {
-        return Vector(a.x * scalar, a.y * scalar);
-    }
-    
-    static float dot(const Vector& a, const Vector& b) {
-        return a.x * b.x + a.y * b.y;
-    }
-};
+}
+
+// Static methods
+Vector Vector::add(const Vector& a, const Vector& b) {
+    return Vector(a.x + b.x, a.y + b.y);
+}
+
+Vector Vector::sub(const Vector& a, const Vector& b) {
+    return Vector(a.x - b.x, a.y - b.y);
+}
+
+Vector Vector::mult(const Vector& a, float scalar) {
+    return Vector(a.x * scalar, a.y * scalar);
+}
+
+float Vector::dot(const Vector& a, const Vector& b) {
+    return a.x * b.x + a.y * b.y;
+}
