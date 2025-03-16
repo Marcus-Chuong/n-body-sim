@@ -54,13 +54,7 @@ void Quadtree::Insert(Particle p){
                     children[i].Insert(p);
                 }
             }
-        }
-    } else {
-        totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
-        totalMass += p.heat;
-        for (int i = 0; i < 4; i++){
-            children[i].Insert(p);
-        }
+            }
         }
     }
     
@@ -72,6 +66,10 @@ void Quadtree::Insert(Particle p){
                 children[i].findParticle(particles);
             }
         }
+    }
+    
+    void Quadtree::display(){
+        
     }
 
     

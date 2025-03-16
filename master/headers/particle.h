@@ -10,15 +10,8 @@ public:
     float heat;
 
     Particle();
-
-    Particle(Vector pos, Vector vel) 
-        : pos(pos), vel(vel), nextPos(pos), nextVel(vel), heat(1.0f) {}
-
-    void update(float dt) {
-        pos = Vector::add(pos, Vector::mult(vel, dt));
-        heat *= 0.999f;
-    }
-
+    Particle(Vector pos, Vector vel);
+    void update(float dt);
     void display() {
         /*stroke(getColor(heat / 15.0f));
         point(pos.x, pos.y);*/
