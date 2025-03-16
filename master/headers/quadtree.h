@@ -28,6 +28,10 @@ public:
         this->particleCount = 0;
     }
 
-    
+    void Split();
+    void Insert(Particle p);
+    void findParticle(std::vector<Particle>);
+    void display();
+
 
 };
