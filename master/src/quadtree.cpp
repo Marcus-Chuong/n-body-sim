@@ -28,7 +28,38 @@ void Quadtree::Split(){
 }
 
 void Quadtree::Insert(Particle p){
-
-
-
+    if (leaf){
+        if (particleCount == 0){
+            particle = p;
+            totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
+            totalMass += p.heat;
+            particleCount++;
+        } else {
+            if (particleCount == 1){
+                Split();
+                for (int i = 0; i < 4; i++){
+                    children[i].Insert(particle);
+                }
+                particleCount++;
+                particle = Particle();
+                totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
+                totalMass += p.heat;
+                for (int i = 0; i < 4; i++){
+                    children[i].Insert(p);
+                }
+            } else {
+                totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
+                totalMass += p.heat;
+                for (int i = 0; i < 4; i++){
+                    children[i].Insert(p);
+                }
+            }
+        }
+    } else {
+        totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
+        totalMass += p.heat;
+        for (int i = 0; i < 4; i++){
+            children[i].Insert(p);
+        }
+    }
 }
