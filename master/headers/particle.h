@@ -9,6 +9,8 @@ public:
     Vector nextVel;
     float heat;
 
+    Particle();
+
     Particle(Vector pos, Vector vel) 
         : pos(pos), vel(vel), nextPos(pos), nextVel(vel), heat(1.0f) {}
 
