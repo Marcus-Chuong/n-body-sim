@@ -16,7 +16,7 @@ Quadtree::Quadtree(float x, float y, float w) {
     this->particleCount = 0;
 }
 
-void Quadtree::Split(){
+void Quadtree::Split() {
     float halfWidth = w / 2;
     float x = this->x;
     float y = this->y;
@@ -27,49 +27,47 @@ void Quadtree::Split(){
     leaf = false;
 }
 
-void Quadtree::Insert(Particle p){
-    if (leaf){
-        if (particleCount == 0){
+void Quadtree::Insert(Particle p) {
+    if (leaf) {
+        if (particleCount == 0) {
             particle = p;
             totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
             totalMass += p.heat;
             particleCount++;
         } else {
-            if (particleCount == 1){
+            if (particleCount == 1) {
                 Split();
-                for (int i = 0; i < 4; i++){
+                for (int i = 0; i < 4; i++) {
                     children[i].Insert(particle);
                 }
                 particleCount++;
                 particle = Particle();
                 totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
                 totalMass += p.heat;
-                for (int i = 0; i < 4; i++){
+                for (int i = 0; i < 4; i++) {
                     children[i].Insert(p);
                 }
             } else {
                 totalCenterOfMass = Vector::add(totalCenterOfMass, Vector::mult(p.pos, p.heat));
                 totalMass += p.heat;
-                for (int i = 0; i < 4; i++){
+                for (int i = 0; i < 4; i++) {
                     children[i].Insert(p);
                 }
             }
-            }
         }
     }
-    
-    void Quadtree::findParticle(std::vector<Particle> particles){
-        if (leaf){
-            particles.push_back(particle);
-        } else {
-            for (int i = 0; i < 4; i++){
-                children[i].findParticle(particles);
-            }
-        }
-    }
-    
-    void Quadtree::display(){
-        
-    }
+}
 
-    
+void Quadtree::findParticle(std::vector<Particle>& particles) {
+    if (leaf) {
+        particles.push_back(particle);
+    } else {
+        for (int i = 0; i < 4; i++) {
+            children[i].findParticle(particles);
+        }
+    }
+}
+
+void Quadtree::display() {
+    // Implement display logic if needed
+}

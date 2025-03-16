@@ -1,4 +1,4 @@
-#include "vector.h"
+#include "C:\Users\marcu\Desktop\Folder of Death\n-body-sim\master\headers\vector.h"
 #include <cmath>
 #include <sstream>
 #include <iomanip>
@@ -51,6 +51,10 @@ void Vector::normalize() {
     if (m > 0) {
         mult(1.0f / m);
     }
+}
+
+float Vector::dist(const Vector& other) const {
+    return std::sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y));
 }
 
 // Static methods

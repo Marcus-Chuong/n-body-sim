@@ -25,4 +25,5 @@ public:
     static Vector sub(const Vector& a, const Vector& b);
     static Vector mult(const Vector& a, float scalar);
     static float dot(const Vector& a, const Vector& b);
+    float dist(const Vector& other) const;
 };
