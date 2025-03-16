@@ -61,5 +61,17 @@ void Quadtree::Insert(Particle p){
         for (int i = 0; i < 4; i++){
             children[i].Insert(p);
         }
+        }
     }
-}
+    
+    void Quadtree::findParticle(std::vector<Particle> particles){
+        if (leaf){
+            particles.push_back(particle);
+        } else {
+            for (int i = 0; i < 4; i++){
+                children[i].findParticle(particles);
+            }
+        }
+    }
+
+    
