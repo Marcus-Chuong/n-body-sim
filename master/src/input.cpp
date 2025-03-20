@@ -1,20 +1,40 @@
 #include "C:\Users\marcu\Desktop\Folder of Death\n-body-sim\master\headers\input.h"
+#include <iostream>
+
+using namespace std;
 
 void mouseDragged() {
-  if (mouseButton == RIGHT) { updateCam(); return; }
+  if (mouseButton == RIGHT) { 
+    cout << "Right mouse button dragged" << endl;
+    updateCam(); 
+    return; 
+  }
 }
 
 void mousePressed() {
-  if (mouseButton == RIGHT) { setCamOffsets(); return; }
-  if (mouseButton == LEFT) { setInsertStart(); return; }
+  if (mouseButton == RIGHT) { 
+    cout << "Right mouse button pressed" << endl;
+    setCamOffsets(); 
+    return; 
+  }
+  if (mouseButton == LEFT) { 
+    cout << "Left mouse button pressed" << endl;
+    setInsertStart(); 
+    return; 
+  }
 }
 
 void mouseReleased() {
-  if (mouseButton == LEFT) { insertSquare(); return; }
+  if (mouseButton == LEFT) { 
+    cout << "Left mouse button released" << endl;
+    insertSquare(); 
+    return; 
+  }
 }
 
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
+  cout << "Mouse wheel event: " << e << endl;
 
   if (e < 0) {
     tox -= dzoom * (mouseX - tox);
