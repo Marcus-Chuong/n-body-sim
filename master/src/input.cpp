@@ -1,7 +1,39 @@
 #include "C:\Users\marcu\Desktop\Folder of Death\n-body-sim\master\headers\input.h"
 #include <iostream>
+#include <SFML/Window/Event.hpp> // Include the SFML header for MouseEvent
+
+#define LEFT 0
+#define RIGHT 1
 
 using namespace std;
+
+extern float camX, camY, camZoom;
+extern float mouseX, mouseY, tox, toy, tozoom, dzoom;
+extern int mouseButton;
+
+void updateCam() {
+  camX = tox + (mouseX - tox) / tozoom;
+  camY = toy + (mouseY - toy) / tozoom;
+  camZoom = tozoom;
+  cout << "Camera updated to position (" << camX << ", " << camY << ") with zoom " << camZoom << endl;
+}
+
+void setCamOffsets() {
+  tox = camX - mouseX / camZoom;
+  toy = camY - mouseY / camZoom;
+  tozoom = camZoom;
+  cout << "Camera offsets set to (" << tox << ", " << toy << ") with zoom " << tozoom << endl;
+}
+
+void setInsertStart() {
+  // Logic to set the start of an insertion
+  cout << "Insert start set at (" << mouseX << ", " << mouseY << ")" << endl;
+}
+
+void insertSquare() {
+  // Logic to insert a square
+  cout << "Square inserted at (" << mouseX << ", " << mouseY << ")" << endl;
+}
 
 void mouseDragged() {
   if (mouseButton == RIGHT) { 
